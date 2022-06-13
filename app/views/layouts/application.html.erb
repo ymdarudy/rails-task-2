@@ -11,6 +11,7 @@
 
   <body>
     <% if logged_in? %>
+      <p>ようこそ<%= current_user.name%>さん</p>
       <%= link_to "プロフィール", user_path(current_user.id) %>
       <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
     <% else %>
