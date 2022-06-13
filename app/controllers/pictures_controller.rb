@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: %i[ show edit update destroy ]
+  before_action :ensure_user, only: %i[ edit update destroy ]
 
   def index
     @pictures = Picture.all.order(updated_at: :desc)
@@ -62,6 +63,10 @@ class PicturesController < ApplicationController
 
   def set_picture
     @picture = Picture.find(params[:id])
+  end
+
+  def ensure_user
+    redirect_to pictures_path unless @picture.user == current_user
   end
 
   def picture_params

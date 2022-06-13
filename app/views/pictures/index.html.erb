@@ -1,4 +1,4 @@
-<h1>Pictures</h1>
+<h1>投稿一覧</h1>
 
 <table>
   <thead>
@@ -19,8 +19,13 @@
         <td><%= picture.image %></td>
         <td><%= picture.user.name %></td>
         <td><%= link_to '詳細', picture %></td>
-        <td><%= link_to '編集', edit_picture_path(picture) %></td>
-        <td><%= link_to '削除', picture, method: :delete, data: { confirm: '本当に削除してもいいですか？' } %></td>
+        <% if picture.user == current_user %>
+          <td><%= link_to '編集', edit_picture_path(picture)  %></td>
+          <td><%= link_to '削除', picture, method: :delete, data: { confirm: '本当に削除してもいいですか？' } %></td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

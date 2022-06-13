@@ -18,5 +18,7 @@
   <%= @picture.user.name %>
 </p>
 
-<%= link_to '編集', edit_picture_path(@picture) %> |
+<% if @picture.user == current_user %>
+  <%= link_to '編集', edit_picture_path(@picture) %> |
+<% end %>
 <%= link_to '一覧に戻る', pictures_path %>
