@@ -10,18 +10,30 @@
   </head>
 
   <body>
-    <% if logged_in? %>
-      <p>ようこそ<%= current_user.name%>さん</p>
-      <%= link_to "プロフィール", user_path(current_user.id) %>
-      <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
-    <% else %>
-      <%= link_to "アカウント登録", new_user_path %>
-      <%= link_to "ログイン", new_session_path %>
-    <% end %>
+    <header>
+      <h1>友だちつながりアプリ</h1>
+    </header>
+
+    <div class="login_status">
+      <% if logged_in? %>
+        <%= link_to "プロフィール", user_path(current_user.id) %>
+        <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+        <h3>ようこそ<%= current_user.name%>さん</h3>
+      <% else %>
+        <%= link_to "アカウント登録", new_user_path %>
+        <%= link_to "ログイン", new_session_path %>
+      <% end %>
+    </div>
 
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
+
     <%= yield %>
+
+    <footer>
+      <p>~最近の出来事を画像と共に投稿しましょう~</p>
+      <p>※画像の投稿は任意</p>
+    </footer>
   </body>
 </html>

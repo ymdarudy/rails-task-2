@@ -16,11 +16,11 @@
       <tr>
         <td><%= picture.title %></td>
         <td><%= picture.content %></td>
-        <td><%= picture.image %></td>
+        <td><%= "画像あり" if picture.image? %></td>
         <td><%= picture.user.name %></td>
         <td><%= link_to '詳細', picture %></td>
         <% if picture.user == current_user %>
-          <td><%= link_to '編集', edit_picture_path(picture)  %></td>
+          <td><%= link_to '編集', edit_picture_path(picture) %></td>
           <td><%= link_to '削除', picture, method: :delete, data: { confirm: '本当に削除してもいいですか？' } %></td>
         <% else %>
           <td></td>
