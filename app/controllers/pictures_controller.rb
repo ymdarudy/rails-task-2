@@ -18,17 +18,14 @@ class PicturesController < ApplicationController
 
   def create
     @picture = current_user.pictures.build(picture_params)
-    if params[:back]
-      render :new
-    else
-      respond_to do |format|
-        if @picture.save
-          format.html { redirect_to picture_url(@picture), notice: "新規投稿しました！" }
-          format.json { render :show, status: :created, location: @picture }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @picture.errors, status: :unprocessable_entity }
-        end
+    render :new and return if params[:back]
+    respond_to do |format|
+      if @picture.save
+        format.html { redirect_to picture_url(@picture), notice: "新規投稿しました！" }
+        format.json { render :show, status: :created, location: @picture }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @picture.errors, status: :unprocessable_entity }
       end
     end
   end
